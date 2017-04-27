@@ -3,5 +3,6 @@
 *.meta
 *.log
 MainProj-Try1/Library*
+MainProj-Try1\Library\*
 MainProj-Try1/ProjectSettings
 MainProj-Try1/Test1*
