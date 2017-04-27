@@ -85,8 +85,8 @@ public class MazeSpawner : MonoBehaviour {
                 //coin generation
                 if (cell.IsGoal && GoalPrefab != null)
                 {
-                    print(GoalPrefab.ToString());
-                    tmp = Instantiate(GoalPrefab, new Vector3(x, 1, z), Quaternion.Euler(0, 0, 0)) as GameObject;
+                    //print(GoalPrefab == null);
+                    tmp = Instantiate(GoalPrefab, new Vector3(x, 0.01f, z), Quaternion.Euler(0, 0, 0)) as GameObject;
                     tmp.transform.parent = transform;
                 }
             }
