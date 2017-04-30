@@ -6,3 +6,7 @@ MainProj-Try1/Library*
 MainProj-Try1\Library\*
 MainProj-Try1/ProjectSettings
 MainProj-Try1/Test1*
+MainProj-Try1/Temp*
+*.csproj
+*.sln
+*.userprefs
