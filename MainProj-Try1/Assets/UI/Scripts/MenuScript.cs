@@ -39,7 +39,10 @@ public class MenuScript : MonoBehaviour
     public void StartLevel()
     {
         //Code to start Level 1 goes here
+<<<<<<< HEAD
         Application.LoadLevel("MainScene");
+=======
+>>>>>>> d1172b6e03b38a24cbff369e4bb9735375c633fc
     }
 
     public void ExitGame()
