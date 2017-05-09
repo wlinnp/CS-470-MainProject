@@ -6,7 +6,7 @@ using UnityEngine;
  * author: Wai Phyo
  * class: CS 470 - Game Development
  * Main Project
- * last modified: 05/04/2017
+ * last modified: 05/09/2017
  * 
  * purpose: Generating Prefab Ceiling at the spceific height of the maze. 
  */
