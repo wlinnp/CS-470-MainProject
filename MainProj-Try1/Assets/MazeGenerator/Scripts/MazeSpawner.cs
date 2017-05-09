@@ -38,13 +38,18 @@ public class MazeSpawner : MonoBehaviour {
     public GameObject GoalPrefab = null;
     //put first person shooter here.
     public GameObject HeroPrefab = null;
+
+    public GameObject UpperWallPrefab = null;
     // delay period when a zombie is generated. 
-    public float spawnPeriod = 3.0f;
+    public float SpawnPeriod = 3.0f;
     public static int Rows = 3;
     public static int Columns = 4;
 	public float CellWidth = 5;
 	public float CellHeight = 5;
 	public bool AddGaps = true;
+
+    private float UpperWallHeight = 3.1f;
+    private float UpperWallOffset = 2.1f;
     
     private BasicMazeGenerator mMazeGenerator = null;
 
@@ -70,6 +75,7 @@ public class MazeSpawner : MonoBehaviour {
         GenerateGoal();
         StartCoroutine(GenerateEnemy());
         GenerateHero();
+        GenerateUpperWall();
     }
 
     /**
@@ -185,7 +191,7 @@ public class MazeSpawner : MonoBehaviour {
         int column = Columns - 1;
         float diff = 0f;
         while (true) {
-            yield return new WaitForSeconds(spawnPeriod);
+            yield return new WaitForSeconds(SpawnPeriod);
             MazeCell cell = mMazeGenerator.GetMazeCell(row, column);
             if (ZombiePrefab != null) {
                 GameObject tmp = Instantiate(ZombiePrefab, new Vector3(GetXForCell(column) + diff, 0.01f, GetZForCell(row) + diff), Quaternion.Euler(0, 0, 0)) as GameObject;
@@ -202,6 +208,28 @@ public class MazeSpawner : MonoBehaviour {
         MazeCell cell = mMazeGenerator.GetMazeCell(0, 0);
         if (HeroPrefab != null) {
             GameObject tmp = Instantiate(HeroPrefab, new Vector3(GetXForCell(0), 0.01f, GetZForCell(0)), Quaternion.Euler(0, 0, 0)) as GameObject;
+            tmp.transform.parent = transform;
+        }
+    }
+
+    private void GenerateUpperWall() {
+        if (UpperWallPrefab == null) {
+            print("error");
+            return;
+        }
+        for (int column = 0; column < Columns; column++) {
+            GameObject tmp = Instantiate(UpperWallPrefab, new Vector3(GetXForCell(column), UpperWallHeight, GetZForCell(0) - UpperWallOffset), Quaternion.Euler(0, 0, 0)) as GameObject;
+            tmp.transform.parent = transform;
+
+            tmp = Instantiate(UpperWallPrefab, new Vector3(GetXForCell(column), UpperWallHeight, GetZForCell(Columns - 1) - UpperWallOffset), Quaternion.Euler(0, 0, 0)) as GameObject;
+            tmp.transform.parent = transform;
+        }
+
+        for (int row = 0; row < Rows; row++) {
+            GameObject tmp = Instantiate(UpperWallPrefab, new Vector3(GetXForCell(0) - UpperWallOffset, UpperWallHeight, GetZForCell(row)), Quaternion.Euler(0, 90, 0)) as GameObject;
+            tmp.transform.parent = transform;
+
+            tmp = Instantiate(UpperWallPrefab, new Vector3(GetXForCell(Columns - 1) + UpperWallOffset, UpperWallHeight, GetZForCell(row)), Quaternion.Euler(0, 90, 0)) as GameObject;
             tmp.transform.parent = transform;
         }
     }

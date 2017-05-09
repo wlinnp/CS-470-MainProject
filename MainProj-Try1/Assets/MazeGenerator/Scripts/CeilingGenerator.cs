@@ -12,7 +12,9 @@ using UnityEngine;
  */
 public class CeilingGenerator : MonoBehaviour {
     public GameObject Ceiling = null;
-    public float CeilingHeight;
+    public float CeilingHeight = 5.3f;
+    public float CeilingLength = 4f;
+    public float CeilingWidth = 4f;
     
     /**
      * Generating Ceiling on start.
@@ -29,10 +31,10 @@ public class CeilingGenerator : MonoBehaviour {
                 for (int col = 0; col < MazeSpawner.Columns; col++) {
                     GameObject tmp = Instantiate(Ceiling, new Vector3(x, CeilingHeight, z), Quaternion.Euler(0, 0, 0)) as GameObject;
                     tmp.transform.parent = transform;
-                    z += 10;
+                    x += CeilingWidth;
                 }
-                x += 10;
-                z = 0;
+                z += CeilingLength;
+                x = 0;
             }
         }
     }
